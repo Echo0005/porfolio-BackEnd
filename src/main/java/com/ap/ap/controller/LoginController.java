@@ -19,10 +19,10 @@ public class LoginController
         this.loginService = loginService;
     }
 
-    @GetMapping( "/all" )
-    public ResponseEntity<List<Login>> obtenerLogin()
+    @GetMapping( "/id/{id}" )
+    public ResponseEntity<Login> obtenerLogin(@PathVariable( "id" ) Long id)
     {
-        List<Login> login = loginService.buscarLogin();
+        Login login = loginService.buscarLoginPorId(id);
         return new ResponseEntity<>(login, HttpStatus.OK);
     }
 

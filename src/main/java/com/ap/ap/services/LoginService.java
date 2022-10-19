@@ -1,6 +1,8 @@
 package com.ap.ap.services;
 
+import com.ap.ap.exception.UserNotFoundException;
 import com.ap.ap.models.Login;
+import com.ap.ap.models.Usuario;
 import com.ap.ap.repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,5 +37,10 @@ public class LoginService
     public void borrarLogin(Long id)
     {
         loginRepository.deleteById(id);
+    }
+
+    public Login buscarLoginPorId(Long id)
+    {
+        return loginRepository.findById(id).orElseThrow(() -> new UserNotFoundException("usuario no encontrado"));
     }
 }
