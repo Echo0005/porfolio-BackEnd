@@ -1,11 +1,12 @@
 package com.ap.ap.controller;
 
-import com.ap.ap.models.Educacion;
 import com.ap.ap.models.Usuario;
 import com.ap.ap.services.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping( "/usuario" )
@@ -22,6 +23,13 @@ public class UsuarioController
     public ResponseEntity<Usuario> obtenerUsuario( @PathVariable( "id" ) Long id )
     {
         Usuario usuario = usuarioService.buscarUsuarioPorId(id);
+        return new ResponseEntity<>(usuario, HttpStatus.OK);
+    }
+    
+    @GetMapping( "/all" )
+    public ResponseEntity<List<Usuario>> obtenerUsuario()
+    {
+        List<Usuario> usuario = usuarioService.buscarUsuarios();
         return new ResponseEntity<>(usuario, HttpStatus.OK);
     }
 
